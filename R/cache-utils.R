@@ -31,14 +31,20 @@ hash_query <- function(query) {
 #' Check if given key exists in cache
 #'
 #' @param key hashed representation of function and args
+#' @param max_lifetime max age of cached object (days)
 #'
 #' @return boolean
 #' @export
 #'
 #' @examples
 #' exists_in_cache("de245179163e5245a56484e7207bf3a3469c358b")
-exists_in_cache <- function(key) {
-  return(file.exists(file.path(get_cache_dir(), key)))
+exists_in_cache <- function(key, max_lifetime) {
+  file_path <- file.path(get_cache_dir(), key)
+  if(!missing(max_lifetime)) {
+    age <- difftime(Sys.now(), file.info(file_path)$mtime, units = "days")
+    if(age >= max_lifetime) return(FALSE)
+  }
+  return(file.exists(file_path))
 }
 
 #' Save R object to cache
@@ -78,3 +84,4 @@ read_from_cache <- function(key) {
         file = stderr())
   return(readRDS(path))
 }
+

@@ -2,6 +2,7 @@
 
 export(cache_info)
 export(cache_op)
+export(delete_cache)
 export(exists_in_cache)
 export(get_cache_dir)
 export(hash_query)
