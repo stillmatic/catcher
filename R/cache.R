@@ -53,12 +53,14 @@ exists_in_cache <- function(key) {
 #' \dontrun{save_to_cache(ggplot2::diamonds, "6904e1dbc962a5df3040efd454ade0d564be27ce")}
 save_to_cache <- function(df, key) {
   path <- file.path(get_cache_dir(), key)
-  write(paste0("saving to cache at ", Sys.time()), file = stdout())
+  write(paste0("saving to cache at ", Sys.time()), file = stderr())
   saveRDS(df, path)
-  return(invisible(df))  # TODO not sure if we need this
+  return(invisible(df))
 }
 
-#' Read file from cache
+#' Read file from cache.
+#'
+#' Also includes when the file was created and how old it is.
 #'
 #' @param key hashed representation of object to look up
 #'
@@ -69,7 +71,10 @@ save_to_cache <- function(df, key) {
 #' \dontrun{read_from_cache("6904e1dbc962a5df3040efd454ade0d564be27ce")}
 read_from_cache <- function(key) {
   path <- file.path(get_cache_dir(), key)
-  # TODO: fix path time
-  write(paste0("reading from cache created at ", Sys.time()), file = stdout())
+  mtime <- file.info(path)$mtime
+  age <- round(difftime(Sys.time(), mtime, units = "days"), 2)
+
+  write(paste0("reading from cache created at ", mtime, "; ", age, " days old."),
+        file = stderr())
   return(readRDS(path))
 }

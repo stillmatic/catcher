@@ -32,3 +32,28 @@ cache_op <- function(fun, query,
     return(dat)
   }
 }
+
+#' Get info about the cache
+#'
+#' Returns table with hashes, size of files (in MB), when each file was last modified, and the age in days of each file.
+#'
+#' @param summary_only Should we only print summary info?
+#'
+#' @return info about files in the cache
+#' @export
+#'
+#' @examples
+#' cache_info(F)
+cache_info <- function(summary_only = F) {
+  info <- file.info(dir(get_cache_dir(), full.names = T))
+  rownames(info) <- dir(get_cache_dir())
+  info$size <- round(info$size / (1000 * 1000), 2) # return MB
+  info$age <- round(difftime(Sys.time(), info$mtime, units = "days"), 2)
+  summ_str <- paste("Cache has", nrow(info),
+                     "files with a total of", sum(info$size), "MB.")
+  write(summ_str, file = stderr())
+  if(summary_only) {
+    return(invisible(summ_str))
+  }
+  return(info[c("size", "mtime", "age")])
+}

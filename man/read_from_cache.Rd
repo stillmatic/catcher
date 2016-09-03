@@ -2,7 +2,7 @@
 % Please edit documentation in R/cache.R
 \name{read_from_cache}
 \alias{read_from_cache}
-\title{Read file from cache}
+\title{Read file from cache.}
 \usage{
 read_from_cache(key)
 }
@@ -13,7 +13,7 @@ read_from_cache(key)
 cached file
 }
 \description{
-Read file from cache
+Also includes when the file was created and how old it is.
 }
 \examples{
 \dontrun{read_from_cache("6904e1dbc962a5df3040efd454ade0d564be27ce")}
