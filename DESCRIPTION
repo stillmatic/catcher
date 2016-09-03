@@ -1,0 +1,12 @@
+Package: cacheR
+Type: Package
+Title: Drop In Caching for R Functions
+Version: 0.1.0
+Author: Chris Hua
+Maintainer: Chris Hua <chua@wharton.upenn.edu>
+Description: Stores results of computations on disk, and automagically
+    accesses them from disk when called again.
+License: GPL-2
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 5.0.1
