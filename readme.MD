@@ -13,6 +13,14 @@ if(!require("devtools")) install.packages("devtools")
 devtools::install_github("stillmatic/cacheR")
 ```
 
+## Why cacheR
+
+This library is very light and "just works". It does not require use of databases or any other dependencies. Its core functions are easy to understand and can easily replace existing code without breaking old functionality. This package additionally takes care of all necessary hashing.
+
+There is no setup necessary but further customizability is on the roadmap.
+
+This package was inspired by some of the work I did on [Rbnb](https://medium.com/airbnb-engineering/using-r-packages-and-education-to-scale-data-science-at-airbnb-906faa58e12d) while at Airbnb Data Science this summer. Particular thanks are due to Ricardo Bion and Jason Goodman for their earlier work on this problem.
+
 ## Usage
 
 The main function is `cache_op()`:
@@ -66,9 +74,9 @@ sin_c(pi)
 
 The function `cache_op()` takes a few additional arguments which customize the behavior of the caching.
 
-`use_cache` - self explanatory; sometimes you want to bypass the cache and neither load the file from cache nor save the query results to cache. Default is TRUE, i.e. use the caching functionality.
-
-`max_lifetime` - the max number of days old a cached file can be. Default is 30 days.
+* `use_cache` - self explanatory; sometimes you want to bypass the cache and neither load the file from cache nor save the query results to cache. Default is TRUE, i.e. use the caching functionality.
+* `overwrite` - this is useful when the file exists in the cache; ie has been cached before, but you want to update the cached value with the newest version.
+* `max_lifetime` - the max number of days old a cached file can be. Default is 30 days. If the cached version is older than this, then the function will rerun and overwrite with the new data.
 
 When wrapping your own custom functions with caches, you can modify these parameters however you want. Let's say you have some function `get_ga()` that gathers Google Analytics data for the last week, so you want to redownload the data if it's been more than 7 days since the last update. Then, you would initiate it as:
 
@@ -83,11 +91,3 @@ get_ga_c <- function(query, max_lifetime = 7, ...) {
   cacheR::cache_op("get_ga", max_lifetime = max_lifetime, query, ...)
 }
 ```
-
-## Why cacheR
-
-This library is very light and "just works". It does not require use of databases or any other dependencies. Its core functions are easy to understand and can easily replace existing code without breaking old functionality. This package additionally takes care of all necessary hashing.
-
-There is no setup necessary but further customizability is on the roadmap.
-
-This package was inspired by some of the work I did on [Rbnb](https://medium.com/airbnb-engineering/using-r-packages-and-education-to-scale-data-science-at-airbnb-906faa58e12d) while at Airbnb Data Science this summer. Particular thanks are due to Ricardo Bion and Jason Goodman for their earlier work on this problem.

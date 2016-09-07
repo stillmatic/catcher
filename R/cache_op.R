@@ -3,6 +3,7 @@
 #' @param fun function name (string)
 #' @param query first argument to fun
 #' @param use_cache should we use cache this time
+#' @param overwrite if cached file exists, should the function run and overwrite?
 #' @param max_lifetime max acceptable age of a cached object
 #' @param ... other parameters passed to fun
 #'
@@ -15,10 +16,12 @@
 #' cache_op("read.csv", "https://cdn.rawgit.com/Keno/8573181/raw/7e97f56f521d1f49b966e04457687e87da1b062b/gistfile1.txt", header = T)
 cache_op <- function(fun, query,
                      use_cache = T,
+                     overwrite = F,
                      max_lifetime = 30,
                      ...) {
   # separate function name and function
   fun2 <- match.fun(fun)
+
   # run and immediately return the data
   if(!use_cache) {
     return(fun2(query, ...))
@@ -26,7 +29,7 @@ cache_op <- function(fun, query,
 
   key <- hash_query(paste0(fun, query, ...))
   # load cached version
-  if(exists_in_cache(key, max_lifetime)) {
+  if(exists_in_cache(key, max_lifetime) && !overwrite) {
     dat <- read_from_cache(key)
     return(dat)
   } else {
@@ -64,7 +67,7 @@ cache_info <- function(summary_only = F) {
 
 #' Delete your entire cache
 #'
-#' @param really set this to TRUE if you actually want to
+#' @param really set this to TRUE if you actually want to delete
 #'
 #' @return an empty cache folder
 #' @export

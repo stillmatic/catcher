@@ -15,12 +15,9 @@ get_cache_dir <- function() {
 
 #' Hash an arbitrary string
 #'
-#' Very light wrapper
-#'
 #' @param query to hash
 #'
 #' @return sha1 hash
-#' @export
 #'
 #' @examples
 #' hash_query("sin1234")
@@ -34,14 +31,13 @@ hash_query <- function(query) {
 #' @param max_lifetime max age of cached object (days)
 #'
 #' @return boolean
-#' @export
 #'
 #' @examples
 #' exists_in_cache("de245179163e5245a56484e7207bf3a3469c358b")
 exists_in_cache <- function(key, max_lifetime) {
   file_path <- file.path(get_cache_dir(), key)
   if(!missing(max_lifetime)) {
-    age <- difftime(Sys.now(), file.info(file_path)$mtime, units = "days")
+    age <- difftime(Sys.time(), file.info(file_path)$mtime, units = "days")
     if(age >= max_lifetime) return(FALSE)
   }
   return(file.exists(file_path))
@@ -53,7 +49,6 @@ exists_in_cache <- function(key, max_lifetime) {
 #' @param key hashed representation of df's generating query
 #'
 #' @return invisibly returns df
-#' @export
 #'
 #' @examples
 #' \dontrun{save_to_cache(ggplot2::diamonds, "6904e1dbc962a5df3040efd454ade0d564be27ce")}
@@ -71,7 +66,6 @@ save_to_cache <- function(df, key) {
 #' @param key hashed representation of object to look up
 #'
 #' @return cached file
-#' @export
 #'
 #' @examples
 #' \dontrun{read_from_cache("6904e1dbc962a5df3040efd454ade0d564be27ce")}

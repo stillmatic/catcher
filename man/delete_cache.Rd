@@ -7,7 +7,7 @@
 delete_cache(really = F)
 }
 \arguments{
-\item{really}{set this to TRUE if you actually want to}
+\item{really}{set this to TRUE if you actually want to delete}
 }
 \value{
 an empty cache folder

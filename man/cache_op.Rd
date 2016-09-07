@@ -4,7 +4,7 @@
 \alias{cache_op}
 \title{Wrapper to add caching to functions}
 \usage{
-cache_op(fun, query, use_cache = T, max_lifetime = 30, ...)
+cache_op(fun, query, use_cache = T, overwrite = F, max_lifetime = 30, ...)
 }
 \arguments{
 \item{fun}{function name (string)}
@@ -12,6 +12,8 @@ cache_op(fun, query, use_cache = T, max_lifetime = 30, ...)
 \item{query}{first argument to fun}
 
 \item{use_cache}{should we use cache this time}
+
+\item{overwrite}{if cached file exists, should the function run and overwrite?}
 
 \item{max_lifetime}{max acceptable age of a cached object}
 
