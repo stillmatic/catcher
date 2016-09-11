@@ -1,6 +1,16 @@
-test_that("hashing works") {
-  query <- "read_csvhttps://google.com"
-  hashed <- hash_query(query)
-  digested <- digest::sha1(query)
-  expect_equal(hashed, digested)
-}
+test_that("load nonced val", {
+  nonce <- paste0(sample(c(
+    letters[1:26], LETTERS[1:26]
+  ), 10, replace = T), collapse = "")
+
+  library(digest)
+  digest_c <- function(x, algo = "md5", ...) {
+    cache_op("digest", x, algo = algo, ...)
+  }
+
+  cached_val <- digest_c(nonce)
+  rm(cached_val)
+  cached_val <- digest_c(nonce)
+  actual_val <- digest::digest(nonce, algo = "md5")
+  expect_equal(cached_val, actual_val)
+})

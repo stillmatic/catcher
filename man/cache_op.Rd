@@ -4,7 +4,8 @@
 \alias{cache_op}
 \title{Wrapper to add caching to functions}
 \usage{
-cache_op(fun, query, use_cache = T, overwrite = F, max_lifetime = 30, ...)
+cache_op(fun, query, use_cache = TRUE, overwrite = FALSE,
+  max_lifetime = 30, ...)
 }
 \arguments{
 \item{fun}{function name (string)}
@@ -28,6 +29,6 @@ Wrapper to add caching to functions
 \examples{
 cache_op("sin", pi)
 # note: this below only works on windows; just an example of additional params
-cache_op("read.csv", "https://cdn.rawgit.com/Keno/8573181/raw/7e97f56f521d1f49b966e04457687e87da1b062b/gistfile1.txt", header = T)
+cache_op("read.csv", "https://cdn.rawgit.com/Keno/8573181/raw/7e97f56f521d1f49b966e04457687e87da1b062b/gistfile1.txt", header = TRUE)
 }
 

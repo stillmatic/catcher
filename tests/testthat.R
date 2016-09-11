@@ -1,4 +1,7 @@
+if(!require(testthat)) {
+  install.packages('testthat')
+}
 library(testthat)
-library(cacher)
+library(cacheR)
 
-test_check(cacheR)
+test_check("cacheR")

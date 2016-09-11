@@ -4,7 +4,7 @@
 \alias{delete_cache}
 \title{Delete your entire cache}
 \usage{
-delete_cache(really = F)
+delete_cache(really = FALSE)
 }
 \arguments{
 \item{really}{set this to TRUE if you actually want to delete}
@@ -16,6 +16,6 @@ an empty cache folder
 Delete your entire cache
 }
 \examples{
-\dontrun{delete_cache(T)}
+\dontrun{delete_cache(TRUE)}
 }
 

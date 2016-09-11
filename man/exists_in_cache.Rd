@@ -18,6 +18,6 @@ boolean
 Check if given key exists in cache
 }
 \examples{
-exists_in_cache("de245179163e5245a56484e7207bf3a3469c358b")
+\dontrun{exists_in_cache("de245179163e5245a56484e7207bf3a3469c358b")}
 }
 

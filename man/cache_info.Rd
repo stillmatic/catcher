@@ -4,7 +4,7 @@
 \alias{cache_info}
 \title{Get info about the cache}
 \usage{
-cache_info(summary_only = F)
+cache_info(summary_only = FALSE)
 }
 \arguments{
 \item{summary_only}{Should we only print summary info?}
@@ -16,6 +16,6 @@ info about files in the cache
 Returns table with hashes, size of files (in MB), when each file was last modified, and the age in days of each file.
 }
 \examples{
-cache_info(F)
+cache_info(FALSE)
 }
 

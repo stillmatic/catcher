@@ -16,6 +16,6 @@ sha1 hash
 Hash an arbitrary string
 }
 \examples{
-hash_query("sin1234")
+\dontrun{hash_query("sin1234")}
 }
 

@@ -20,7 +20,7 @@ get_cache_dir <- function() {
 #' @return sha1 hash
 #'
 #' @examples
-#' hash_query("sin1234")
+#' \dontrun{hash_query("sin1234")}
 hash_query <- function(query) {
   return(digest::sha1(query))
 }
@@ -33,10 +33,10 @@ hash_query <- function(query) {
 #' @return boolean
 #'
 #' @examples
-#' exists_in_cache("de245179163e5245a56484e7207bf3a3469c358b")
+#' \dontrun{exists_in_cache("de245179163e5245a56484e7207bf3a3469c358b")}
 exists_in_cache <- function(key, max_lifetime) {
   file_path <- file.path(get_cache_dir(), key)
-  if(!missing(max_lifetime)) {
+  if(file.exists(file_path) && !missing(max_lifetime)) {
     age <- difftime(Sys.time(), file.info(file_path)$mtime, units = "days")
     if(age >= max_lifetime) return(FALSE)
   }

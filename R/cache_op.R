@@ -13,10 +13,10 @@
 #' @examples
 #' cache_op("sin", pi)
 #' # note: this below only works on windows; just an example of additional params
-#' cache_op("read.csv", "https://cdn.rawgit.com/Keno/8573181/raw/7e97f56f521d1f49b966e04457687e87da1b062b/gistfile1.txt", header = T)
+#' cache_op("read.csv", "https://cdn.rawgit.com/Keno/8573181/raw/7e97f56f521d1f49b966e04457687e87da1b062b/gistfile1.txt", header = TRUE)
 cache_op <- function(fun, query,
-                     use_cache = T,
-                     overwrite = F,
+                     use_cache = TRUE,
+                     overwrite = FALSE,
                      max_lifetime = 30,
                      ...) {
   # separate function name and function
@@ -53,8 +53,8 @@ cache_op <- function(fun, query,
 #' @export
 #'
 #' @examples
-#' cache_info(F)
-cache_info <- function(summary_only = F) {
+#' cache_info(FALSE)
+cache_info <- function(summary_only = FALSE) {
   info <- file.info(dir(get_cache_dir(), full.names = T))
   rownames(info) <- dir(get_cache_dir())
   info$size <- round(info$size / (1000 * 1000), 2) # return MB
@@ -77,8 +77,8 @@ cache_info <- function(summary_only = F) {
 #' @export
 #'
 #' @examples
-#' \dontrun{delete_cache(T)}
-delete_cache <- function(really = F) {
+#' \dontrun{delete_cache(TRUE)}
+delete_cache <- function(really = FALSE) {
   if(really) {
     write("deleting cache for good!", file = stderr())
     file.remove(dir(get_cache_dir(), full.names = T))
