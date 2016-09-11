@@ -1,7 +1,7 @@
 Package: catcher
 Type: Package
 Title: Drop in Caching for R Functions
-Version: 0.1.0
+Version: 0.2.0
 Authors@R: c(
     person("Chris", "Hua", email = "chua@wharton.upenn.edu", role = c("aut", "cre"))
   )

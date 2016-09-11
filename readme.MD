@@ -6,7 +6,7 @@
 
 Easily speed up repeated expensive operations by saving the results on disk and loading from disk on subsequent runs, with many quality-of-life enhancements for data scientists.
 
-## Installation:
+## Installation
 
 Install from this repository:
 
@@ -19,7 +19,9 @@ devtools::install_github("stillmatic/catcher")
 
 This package is very light but includes a number of important helpers: advanced management of the cache and when to use the cache. It does not require use of databases or any other dependencies. Its core functions are easy to understand and can easily replace existing code without breaking old functionality. This package additionally takes care of all necessary hashing to store files. 
 
-Existing R caching packages are either too complicated, e.g. [R.cache](https://github.com/HenrikBengtsson/R.cache), or too barebones, e.g. [simpleRCache](https://github.com/cannin/simpleRCache). This package attempts to create a sensible middle ground, with a number of tools essential for data scientists built in. For example, we offer first-class handling of stale cached data and notation of when data was loaded. This is essentially a hashtable held solely on disk and 'instantiated' as your cache directory.
+Existing R caching packages are either too complicated, e.g. [R.cache](https://github.com/HenrikBengtsson/R.cache), or too barebones, e.g. [simpleRCache](https://github.com/cannin/simpleRCache). This package attempts to create a sensible middle ground, with a number of tools essential for data scientists built in. For example, we offer first-class handling of stale cached data and notation of when data was loaded. Existing
+
+In terms of design, this package is essentially a hashtable held solely on disk and 'instantiated' by examining the files in your cache directory.
 
 This package was inspired by some of the work I did on [Rbnb](https://medium.com/airbnb-engineering/using-r-packages-and-education-to-scale-data-science-at-airbnb-906faa58e12d) while at Airbnb Data Science this summer. Particular thanks are due to Ricardo Bion and Jason Goodman for their earlier work on this problem.
 
@@ -87,7 +89,7 @@ get_ga_c <- function(query, ...) {
   cacheR::cache_op("get_ga", max_lifetime = 7, query, ...)
 }
 
-# or
+# or, if you want to expose catcher's options:
 
 get_ga_c <- function(query, max_lifetime = 7, ...) {
   cacheR::cache_op("get_ga", max_lifetime = max_lifetime, query, ...)

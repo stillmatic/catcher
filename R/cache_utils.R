@@ -35,7 +35,7 @@ hash_query <- function(query) {
 #' @examples
 #' \dontrun{exists_in_cache("de245179163e5245a56484e7207bf3a3469c358b")}
 exists_in_cache <- function(key, max_lifetime) {
-  file_path <- file.path(get_cache_dir(), key)
+  file_path <- file_path(get_cache_dir(), key)
   if(file.exists(file_path) && !missing(max_lifetime)) {
     age <- difftime(Sys.time(), file.info(file_path)$mtime, units = "days")
     if(age >= max_lifetime) return(FALSE)
@@ -53,7 +53,7 @@ exists_in_cache <- function(key, max_lifetime) {
 #' @examples
 #' \dontrun{save_to_cache(ggplot2::diamonds, "6904e1dbc962a5df3040efd454ade0d564be27ce")}
 save_to_cache <- function(df, key) {
-  path <- file.path(get_cache_dir(), key)
+  path <- file_path(get_cache_dir(), key)
   write(paste0("saving to cache at ", Sys.time()), file = stderr())
   saveRDS(df, path)
   return(invisible(df))
@@ -70,7 +70,7 @@ save_to_cache <- function(df, key) {
 #' @examples
 #' \dontrun{read_from_cache("6904e1dbc962a5df3040efd454ade0d564be27ce")}
 read_from_cache <- function(key) {
-  path <- file.path(get_cache_dir(), key)
+  path <- file_path(get_cache_dir(), key)
   mtime <- file.info(path)$mtime
   age <- round(difftime(Sys.time(), mtime, units = "days"), 2)
 
@@ -79,3 +79,7 @@ read_from_cache <- function(key) {
   return(readRDS(path))
 }
 
+# for compatibility with rappdirs
+file_path <- function(...) {
+  normalizePath(do.call("file.path", as.list(c(...))), mustWork = FALSE)
+}
