@@ -12,8 +12,9 @@
 #'
 #' @examples
 #' cache_op("sin", pi)
-#' # note: this below only works on windows; just an example of additional params
-#' cache_op("read.csv", "https://cdn.rawgit.com/Keno/8573181/raw/7e97f56f521d1f49b966e04457687e87da1b062b/gistfile1.txt", header = TRUE)
+#' cache_op("read.csv",
+#' "http://www.sample-videos.com/csv/Sample-Spreadsheet-10-rows.csv",
+#' header = TRUE)
 cache_op <- function(fun, query,
                      use_cache = TRUE,
                      overwrite = FALSE,
@@ -67,7 +68,6 @@ cache_info <- function(summary_only = FALSE) {
   }
   return(info[c("size", "mtime", "age")])
 }
-
 
 #' Delete your entire cache
 #'

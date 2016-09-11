@@ -6,7 +6,7 @@
 #' @examples
 #' get_cache_dir()
 get_cache_dir <- function() {
-  path <- file.path("~", "ds_cache")
+  path <- rappdirs::user_cache_dir("catcher")
   if(!dir.exists(path)) {
     dir.create(path)
   }

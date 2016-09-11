@@ -1,18 +1,22 @@
-Package: cacheR
+Package: catcher
 Type: Package
-Title: Drop In Caching for R Functions
+Title: Drop in Caching for R Functions
 Version: 0.1.0
-Author: Chris Hua
 Authors@R: c(
     person("Chris", "Hua", email = "chua@wharton.upenn.edu", role = c("aut", "cre"))
   )
-Description: Stores results of computations on disk, and automagically
-    accesses them from disk when called again.
+Description: Caches results of functions on disk, and automagically
+    accesses them from disk when the function is called again. Especially
+    useful when downloading files from database/web, or running expensive
+    computations. Includes numerous options that data scientists will find
+    useful with managing their cache.
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
-Imports: digest
+Imports: 
+    digest,
+    rappdirs
 Suggests: testthat
 RoxygenNote: 5.0.1
-URL: https://github.com/stillmatic/cacheR
-BugReports: https://github.com/stillmatic/cacheR/issues
+URL: https://github.com/stillmatic/catcher
+BugReports: https://github.com/stillmatic/catcher/issues

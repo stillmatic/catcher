@@ -16,3 +16,4 @@ test_that("load nonced val", {
   actual_val <- digest::digest(nonce, algo = "md5")
   expect_equal(cached_val, actual_val)
 })
+

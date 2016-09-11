@@ -1,8 +1,8 @@
-# cacheR - Drop In Caching for R Functions
+# catcher - Drop In Caching for R Functions
 
 *Author:* Chris Hua / `chua@wharton.upenn.edu`
 
-[![Build Status](https://travis-ci.org/stillmatic/cacheR.svg?branch=master)](https://travis-ci.org/stillmatic/cacheR)
+[![Build Status](https://travis-ci.org/stillmatic/catcher.svg?branch=master)](https://travis-ci.org/stillmatic/catcher)
 
 Easily speed up repeated expensive operations by saving the results on disk and loading from disk on subsequent runs, with many quality-of-life enhancements for data scientists.
 
@@ -12,10 +12,10 @@ Install from this repository:
 
 ```r
 if(!require("devtools")) install.packages("devtools")
-devtools::install_github("stillmatic/cacheR")
+devtools::install_github("stillmatic/catcher")
 ```
 
-## Why cacheR
+## Why catcher
 
 This package is very light but includes a number of important helpers: advanced management of the cache and when to use the cache. It does not require use of databases or any other dependencies. Its core functions are easy to understand and can easily replace existing code without breaking old functionality. This package additionally takes care of all necessary hashing to store files. 
 

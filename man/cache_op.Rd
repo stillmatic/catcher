@@ -28,7 +28,8 @@ Wrapper to add caching to functions
 }
 \examples{
 cache_op("sin", pi)
-# note: this below only works on windows; just an example of additional params
-cache_op("read.csv", "https://cdn.rawgit.com/Keno/8573181/raw/7e97f56f521d1f49b966e04457687e87da1b062b/gistfile1.txt", header = TRUE)
+cache_op("read.csv",
+"http://www.sample-videos.com/csv/Sample-Spreadsheet-10-rows.csv",
+header = TRUE)
 }
 
