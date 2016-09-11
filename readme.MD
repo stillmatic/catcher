@@ -1,8 +1,10 @@
 # cacheR - Drop In Caching for R Functions
 
-*Author:* Chris Hua / paste("chua", "wharton.upenn.edu", sep = "@")
+*Author:* Chris Hua / `chua@wharton.upenn.edu`
 
-Easily speed up repeated expensive operations by saving the results on disk and loading from disk on subsequent runs. Written in base R to ensure cross-platform compatibility.
+[![Build Status](https://travis-ci.org/stillmatic/cacheR.svg?branch=master)](https://travis-ci.org/stillmatic/cacheR)
+
+Easily speed up repeated expensive operations by saving the results on disk and loading from disk on subsequent runs, with many quality-of-life enhancements for data scientists.
 
 ## Installation:
 
@@ -15,9 +17,9 @@ devtools::install_github("stillmatic/cacheR")
 
 ## Why cacheR
 
-This package is very light and "just works". It does not require use of databases or any other dependencies. Its core functions are easy to understand and can easily replace existing code without breaking old functionality. This package additionally takes care of all necessary hashing. There is no setup necessary but further customizability is on the roadmap.
+This package is very light but includes a number of important helpers: advanced management of the cache and when to use the cache. It does not require use of databases or any other dependencies. Its core functions are easy to understand and can easily replace existing code without breaking old functionality. This package additionally takes care of all necessary hashing to store files. 
 
-Existing R caching packages are either too complicated, e.g. [R.cache](https://github.com/HenrikBengtsson/R.cache), or too barebones, e.g. [simpleRCache](https://github.com/cannin/simpleRCache). This package attempts to create a sensible middle ground, with a number of tools essential for data scientists built in. For example, we offer first-class handling of stale cached data and notation of when data was loaded.
+Existing R caching packages are either too complicated, e.g. [R.cache](https://github.com/HenrikBengtsson/R.cache), or too barebones, e.g. [simpleRCache](https://github.com/cannin/simpleRCache). This package attempts to create a sensible middle ground, with a number of tools essential for data scientists built in. For example, we offer first-class handling of stale cached data and notation of when data was loaded. This is essentially a hashtable held solely on disk and 'instantiated' as your cache directory.
 
 This package was inspired by some of the work I did on [Rbnb](https://medium.com/airbnb-engineering/using-r-packages-and-education-to-scale-data-science-at-airbnb-906faa58e12d) while at Airbnb Data Science this summer. Particular thanks are due to Ricardo Bion and Jason Goodman for their earlier work on this problem.
 
