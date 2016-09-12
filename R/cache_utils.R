@@ -7,9 +7,7 @@
 #' get_cache_dir()
 get_cache_dir <- function() {
   path <- rappdirs::user_cache_dir("catcher")
-  if(!dir.exists(path)) {
-    dir.create(path)
-  }
+  dir.create(path, showWarnings = F, recursive = T)
   return(path)
 }
 

@@ -56,7 +56,7 @@ You can wrap this function easily with the following:
 
 ```r
 sql_c <- function(query, ...) {
-  cacheR::cache_op("sql", query, ...)
+  catcher::cache_op("sql", query, ...)
 }
 
 sql_c("SELECT * FROM dim_users LIMIT 100")
@@ -66,7 +66,7 @@ Easily reproducible proof of concept:
 
 ```r
 sin_c <- function(query, ...) { 
-  cacheR::cache_op("sin", query, ...)
+  catcher::cache_op("sin", query, ...)
 }
 
 sin_c(pi)
@@ -86,12 +86,12 @@ When wrapping your own custom functions with caches, you can modify these parame
 
 ```r
 get_ga_c <- function(query, ...) { 
-  cacheR::cache_op("get_ga", max_lifetime = 7, query, ...)
+  catcher::cache_op("get_ga", max_lifetime = 7, query, ...)
 }
 
 # or, if you want to expose catcher's options:
 
 get_ga_c <- function(query, max_lifetime = 7, ...) {
-  cacheR::cache_op("get_ga", max_lifetime = max_lifetime, query, ...)
+  catcher::cache_op("get_ga", max_lifetime = max_lifetime, query, ...)
 }
 ```
