@@ -1,8 +1,10 @@
 # catcher - Drop In Caching for R Functions
 
-*Author:* Chris Hua / `chua@wharton.upenn.edu`
-
 [![Build Status](https://travis-ci.org/stillmatic/catcher.svg?branch=master)](https://travis-ci.org/stillmatic/catcher)
+
+**Author:** Chris Hua / `chua@wharton.upenn.edu`
+
+*There are only two hard things in Computer Science: cache invalidation and naming things. -- Phil Karlton*
 
 Easily speed up repeated expensive operations by saving the results on disk and loading from disk on subsequent runs, with many quality-of-life enhancements for data scientists.
 
