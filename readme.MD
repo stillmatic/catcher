@@ -1,6 +1,8 @@
 # catcher - Drop In Caching for R Functions
 
 [![Build Status](https://travis-ci.org/stillmatic/catcher.svg?branch=master)](https://travis-ci.org/stillmatic/catcher)
+[![codecov](https://codecov.io/gh/stillmatic/catcher/branch/master/graph/badge.svg)](https://codecov.io/gh/stillmatic/catcher)
+
 
 **Author:** Chris Hua / `chua@wharton.upenn.edu`
 

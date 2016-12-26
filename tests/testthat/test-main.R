@@ -31,9 +31,55 @@ test_that("invert a matrix", {
     catcher::cache_op("solve", x, ...)
   }
   inv_matrix <- solve_c(test_matrix, overwrite = T)
-  key <- hash_query(paste0("solve", test_matrix))
+  key <- catcher:::hash_query(paste0("solve", test_matrix, collapse = ""))
   expect_true(catcher:::exists_in_cache(key, 100))
   expect_equal(inv_matrix, solve(test_matrix))
   inv_matrix2 <- solve_c(test_matrix)
   expect_equal(inv_matrix2, solve(test_matrix))
+})
+
+test_that("immediately return data", {
+  test_matrix <- matrix(c(1, 2, 3, 0, 1, 4, 5, 6, 0), nrow = 3)
+  solve_c <- function(x, ...) {
+    catcher::cache_op("solve", x, ...)
+  }
+  inv_matrix <- solve_c(test_matrix, use_cache = F)
+  key <- catcher:::hash_query(paste0("solve", test_matrix))
+  expect_false(catcher:::exists_in_cache(key, 0))
+  expect_equal(inv_matrix, solve(test_matrix))
+})
+
+test_that("locally defined functions work", {
+  dummy <- function(x) {
+    x + 1
+  }
+  dummy_c <- function(x, ...) {
+    catcher::cache_op("dummy", x, ...)
+  }
+  expect_equal(dummy_c(2, overwrite = T), 3)
+  key <- catcher:::hash_query(paste0("dummy", 2))
+  expect_true(catcher:::exists_in_cache(key, 15))
+})
+
+test_that("cache expiration works", {
+  dummy <- function(x, ...) {
+    x + 1
+  }
+  dummy_c <- function(x, ...) {
+    catcher::cache_op("dummy", x)
+  }
+  expect_equal(dummy_c(2, overwrite = T), 3)
+  key <- catcher:::hash_query(paste0("dummy", 2))
+  expect_false(catcher:::exists_in_cache(key, 0))
+})
+
+test_that("cache info works", {
+  info <- catcher::cache_info()
+  expect_is(info, "data.frame") # structure
+  expect_equal(dim(info)[2], 3) # rows
+})
+
+test_that("cache summary works", {
+  info <- catcher::cache_info(TRUE)
+  expect_is(info, "character") # structure
 })

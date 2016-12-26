@@ -32,7 +32,7 @@ cache_op <- function(fun, quer,
     return(fun2(quer, ...))
   }
 
-  key <- hash_query(paste0(fun, quer, ...))
+  key <- hash_query(paste0(fun, quer, ..., collapse = ""))
   # load cached version
   if(exists_in_cache(key, max_lifetime) && !overwrite) {
     dat <- read_from_cache(key)
