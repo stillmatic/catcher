@@ -13,14 +13,14 @@ get_cache_dir <- function() {
 
 #' Hash an arbitrary string
 #'
-#' @param query to hash
+#' @param quer string to hash
 #'
 #' @return sha1 hash
 #'
 #' @examples
 #' \dontrun{hash_query("sin1234")}
-hash_query <- function(query) {
-  return(digest::sha1(query))
+hash_query <- function(quer) {
+  return(digest::sha1(quer))
 }
 
 #' Check if given key exists in cache
@@ -71,9 +71,9 @@ read_from_cache <- function(key) {
   path <- file_path(get_cache_dir(), key)
   mtime <- file.info(path)$mtime
   age <- round(difftime(Sys.time(), mtime, units = "days"), 2)
-
-  write(paste0("reading from cache created at ", mtime, "; ", age, " days old."),
-        file = stderr())
+  out_str <- paste0("reading from cache created at ", mtime, "; ",
+                    age, " days old.")
+  write(out_str, file = stderr())
   return(readRDS(path))
 }
 

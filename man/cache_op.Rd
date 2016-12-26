@@ -4,13 +4,13 @@
 \alias{cache_op}
 \title{Wrapper to add caching to functions}
 \usage{
-cache_op(fun, query, use_cache = TRUE, overwrite = FALSE,
+cache_op(fun, quer, use_cache = TRUE, overwrite = FALSE,
   max_lifetime = 30, ...)
 }
 \arguments{
 \item{fun}{function name (string)}
 
-\item{query}{first argument to fun}
+\item{quer}{first argument to fun}
 
 \item{use_cache}{should we use cache this time}
 

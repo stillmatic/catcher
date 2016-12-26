@@ -4,10 +4,10 @@
 \alias{hash_query}
 \title{Hash an arbitrary string}
 \usage{
-hash_query(query)
+hash_query(quer)
 }
 \arguments{
-\item{query}{to hash}
+\item{quer}{string to hash}
 }
 \value{
 sha1 hash

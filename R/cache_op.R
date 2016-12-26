@@ -1,7 +1,7 @@
 #' Wrapper to add caching to functions
 #'
 #' @param fun function name (string)
-#' @param query first argument to fun
+#' @param quer first argument to fun
 #' @param use_cache should we use cache this time
 #' @param overwrite if cached file exists, should the function run and overwrite?
 #' @param max_lifetime max acceptable age of a cached object
@@ -15,7 +15,7 @@
 #' cache_op("read.csv",
 #' "http://www.sample-videos.com/csv/Sample-Spreadsheet-10-rows.csv",
 #' header = TRUE)
-cache_op <- function(fun, query,
+cache_op <- function(fun, quer,
                      use_cache = TRUE,
                      overwrite = FALSE,
                      max_lifetime = 30,
@@ -29,16 +29,16 @@ cache_op <- function(fun, query,
 
   # run and immediately return the data
   if(!use_cache) {
-    return(fun2(query, ...))
+    return(fun2(quer, ...))
   }
 
-  key <- hash_query(paste0(fun, query, ...))
+  key <- hash_query(paste0(fun, quer, ...))
   # load cached version
   if(exists_in_cache(key, max_lifetime) && !overwrite) {
     dat <- read_from_cache(key)
     return(dat)
   } else {
-    dat <- fun2(query, ...)
+    dat <- fun2(quer, ...)
     save_to_cache(dat, key)
     return(dat)
   }
