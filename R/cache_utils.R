@@ -81,3 +81,28 @@ read_from_cache <- function(key) {
 file_path <- function(...) {
   normalizePath(do.call("file.path", as.list(c(...))), mustWork = FALSE)
 }
+
+#' Smart matching of functions
+#'
+#' @param fun function name, as a string
+#' @return the desired function
+#'
+#' @examples
+#' catcher:::match_fun("digest::digest")
+#' catcher:::match_fun("sum")
+match_fun <- function(fun) {
+  fun2 <- NULL
+  fun <- as.character(fun)
+  # if in form package::function
+  if(grepl("::", fun)) {
+    args <- unlist(strsplit(fun, "::"))
+    fun2 <- utils::getFromNamespace(args[2], args[1])
+  } else {
+    fun2 <- tryCatch({
+      get(fun, mode = "function", envir = parent.frame(2))
+    }, error = function(err) {
+      stop(paste0("Invalid function, ", fun, ", provided."))
+    })
+  }
+  fun2
+}

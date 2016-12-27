@@ -73,6 +73,13 @@ test_that("cache expiration works", {
   expect_false(catcher:::exists_in_cache(key, 0))
 })
 
+test_that("namespaced functions", {
+  digest_c <- function(x, ...) {
+    catcher::cache_op("digest::digest", x, ...)
+  }
+  expect_equal(digest_c("abc", use_cache = F), digest::digest("abc"))
+})
+
 test_that("cache info works", {
   info <- catcher::cache_info()
   expect_is(info, "data.frame") # structure

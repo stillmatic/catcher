@@ -20,12 +20,7 @@ cache_op <- function(fun, quer,
                      overwrite = FALSE,
                      max_lifetime = 30,
                      ...) {
-  # separate function name and function
-  fun2 <- tryCatch({
-    match.fun(fun)
-  }, error = function(err) {
-    stop(paste0("Invalid function ", fun, " provided."))
-  })
+  fun2 <- match_fun(fun)
 
   # run and immediately return the data
   if(!use_cache) {
