@@ -8,7 +8,7 @@
 #' @examples
 #' \dontrun{delete_cache(TRUE)}
 delete_cache <- function(really = FALSE) {
-  if(really) {
+  if (really) {
     write("deleting cache for good!", file = stderr())
     file.remove(dir(get_cache_dir(), full.names = T))
   }

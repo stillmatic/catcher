@@ -14,6 +14,7 @@ info about files in the cache
 }
 \description{
 Returns table with hashes, size of files (in MB), when each file was last modified, and the age in days of each file.
+If the cache folder is empty, or doesn't exist (i.e. not created yet), this returns an empty dataframe.
 }
 \examples{
 cache_info(FALSE)

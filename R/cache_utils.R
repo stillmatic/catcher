@@ -1,5 +1,6 @@
 #' Get cache directory
 #'
+#' @importFrom rappdirs user_cache_dir
 #' @return location of the cache
 #' @export
 #'
@@ -13,6 +14,7 @@ get_cache_dir <- function() {
 
 #' Hash an arbitrary string
 #'
+#' @importFrom digest sha1
 #' @param quer string to hash
 #'
 #' @return sha1 hash
@@ -32,11 +34,11 @@ hash_query <- function(quer) {
 #'
 #' @examples
 #' \dontrun{exists_in_cache("de245179163e5245a56484e7207bf3a3469c358b")}
-exists_in_cache <- function(key, max_lifetime) {
+exists_in_cache <- function(key, max_lifetime = 30) {
   file_path <- file_path(get_cache_dir(), key)
-  if(file.exists(file_path) && !missing(max_lifetime)) {
+  if (file.exists(file_path) && !missing(max_lifetime)) {
     age <- difftime(Sys.time(), file.info(file_path)$mtime, units = "days")
-    if(age >= max_lifetime) return(FALSE)
+    if (age >= max_lifetime) return(FALSE)
   }
   return(file.exists(file_path))
 }
@@ -84,6 +86,7 @@ file_path <- function(...) {
 
 #' Smart matching of functions
 #'
+#' @importFrom assertthat assert_that
 #' @param fun function name, as a string
 #' @return the desired function
 #'
@@ -93,8 +96,13 @@ file_path <- function(...) {
 match_fun <- function(fun) {
   fun2 <- NULL
   fun <- as.character(fun)
-  # if in form package::function
-  if(grepl("::", fun)) {
+  assertthat::assert_that(assertthat::is.string(fun))
+  if (grepl(":::", fun)) {
+    # if in form package:::function
+    args <- unlist(strsplit(fun, ":::"))
+    fun2 <- utils::getFromNamespace(args[2], args[1])
+  } else if (grepl("::", fun)) {
+    # in form, package::function
     args <- unlist(strsplit(fun, "::"))
     fun2 <- utils::getFromNamespace(args[2], args[1])
   } else {

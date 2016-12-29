@@ -4,7 +4,7 @@
 \alias{exists_in_cache}
 \title{Check if given key exists in cache}
 \usage{
-exists_in_cache(key, max_lifetime)
+exists_in_cache(key, max_lifetime = 30)
 }
 \arguments{
 \item{key}{hashed representation of function and args}

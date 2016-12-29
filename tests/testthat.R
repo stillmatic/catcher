@@ -1,5 +1,5 @@
-if(!require(testthat)) {
-  install.packages('testthat')
+if (!require(testthat)) {
+  install.packages("testthat")
 }
 library(testthat)
 library(catcher)

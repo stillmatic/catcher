@@ -14,9 +14,10 @@ License: GPL-3
 Encoding: UTF-8
 LazyData: true
 Imports: 
-    digest,
-    rappdirs
-Suggests: testthat
+    digest (>= 0.6.10),
+    rappdirs (>= 0.3.1),
+    assertthat (>= 0.1)
+Suggests: testthat (>= 1.0.2)
 RoxygenNote: 5.0.1
 URL: https://github.com/stillmatic/catcher
 BugReports: https://github.com/stillmatic/catcher/issues

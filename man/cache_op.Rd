@@ -16,7 +16,7 @@ cache_op(fun, quer, use_cache = TRUE, overwrite = FALSE,
 
 \item{overwrite}{if cached file exists, should the function run and overwrite?}
 
-\item{max_lifetime}{max acceptable age of a cached object}
+\item{max_lifetime}{max acceptable age of a cached object, in days}
 
 \item{...}{other parameters passed to fun}
 }

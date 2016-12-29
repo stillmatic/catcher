@@ -4,7 +4,7 @@
 #' @param quer first argument to fun
 #' @param use_cache should we use cache this time
 #' @param overwrite if cached file exists, should the function run and overwrite?
-#' @param max_lifetime max acceptable age of a cached object
+#' @param max_lifetime max acceptable age of a cached object, in days
 #' @param ... other parameters passed to fun
 #'
 #' @return typical fun, query, ellipsis result
@@ -23,13 +23,13 @@ cache_op <- function(fun, quer,
   fun2 <- match_fun(fun)
 
   # run and immediately return the data
-  if(!use_cache) {
+  if (!use_cache) {
     return(fun2(quer, ...))
   }
 
   key <- hash_query(paste0(fun, quer, ..., collapse = ""))
   # load cached version
-  if(exists_in_cache(key, max_lifetime) && !overwrite) {
+  if (exists_in_cache(key, max_lifetime) && !overwrite) {
     dat <- read_from_cache(key)
     return(dat)
   } else {
@@ -42,6 +42,7 @@ cache_op <- function(fun, quer,
 #' Get info about the cache
 #'
 #' Returns table with hashes, size of files (in MB), when each file was last modified, and the age in days of each file.
+#' If the cache folder is empty, or doesn't exist (i.e. not created yet), this returns an empty dataframe.
 #'
 #' @param summary_only Should we only print summary info?
 #'
@@ -58,25 +59,8 @@ cache_info <- function(summary_only = FALSE) {
   summ_str <- paste("Cache has", nrow(info),
                      "files with a total of", sum(info$size), "MB.")
   write(summ_str, file = stderr())
-  if(summary_only) {
+  if (summary_only) {
     return(invisible(summ_str))
   }
   return(info[c("size", "mtime", "age")])
-}
-
-#' Delete your entire cache
-#'
-#' @param really set this to TRUE if you actually want to delete
-#'
-#' @return an empty cache folder
-#' @export
-#'
-#' @examples
-#' \dontrun{delete_cache(TRUE)}
-delete_cache <- function(really = FALSE) {
-  if(really) {
-    write("deleting cache for good!", file = stderr())
-    file.remove(dir(get_cache_dir(), full.names = T))
-  }
-  invisible(NULL)
 }
