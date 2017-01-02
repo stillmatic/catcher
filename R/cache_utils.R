@@ -47,11 +47,13 @@ exists_in_cache <- function(key, max_lifetime = 30) {
 #'
 #' @param df arbitary R object
 #' @param key hashed representation of df's generating query
+#' @export
 #'
 #' @return invisibly returns df
 #'
 #' @examples
 #' \dontrun{save_to_cache(ggplot2::diamonds, "6904e1dbc962a5df3040efd454ade0d564be27ce")}
+#' \dontrun{cars %>% save_to_cache("car_dataset")}
 save_to_cache <- function(df, key) {
   path <- file_path(get_cache_dir(), key)
   write(paste0("saving to cache at ", Sys.time()), file = stderr())

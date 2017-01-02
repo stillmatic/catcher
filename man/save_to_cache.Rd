@@ -19,5 +19,6 @@ Save R object to cache
 }
 \examples{
 \dontrun{save_to_cache(ggplot2::diamonds, "6904e1dbc962a5df3040efd454ade0d564be27ce")}
+\dontrun{cars \%>\% save_to_cache("car_dataset")}
 }
 
