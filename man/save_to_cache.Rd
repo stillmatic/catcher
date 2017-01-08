@@ -7,7 +7,7 @@
 save_to_cache(df, key)
 }
 \arguments{
-\item{df}{arbitary R object}
+\item{df}{arbitrary R object}
 
 \item{key}{hashed representation of df's generating query}
 }

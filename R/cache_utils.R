@@ -8,7 +8,7 @@
 #' get_cache_dir()
 get_cache_dir <- function() {
   path <- rappdirs::user_cache_dir("catcher")
-  dir.create(path, showWarnings = F, recursive = T)
+  dir.create(path, showWarnings = FALSE, recursive = TRUE)
   return(path)
 }
 
@@ -45,7 +45,7 @@ exists_in_cache <- function(key, max_lifetime = 30) {
 
 #' Save R object to cache
 #'
-#' @param df arbitary R object
+#' @param df arbitrary R object
 #' @param key hashed representation of df's generating query
 #' @export
 #'

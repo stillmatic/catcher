@@ -10,7 +10,7 @@
 delete_cache <- function(really = FALSE) {
   if (really) {
     write("deleting cache for good!", file = stderr())
-    file.remove(dir(get_cache_dir(), full.names = T))
+    file.remove(dir(get_cache_dir(), full.names = TRUE))
   }
   invisible(NULL)
 }
