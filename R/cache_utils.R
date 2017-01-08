@@ -36,7 +36,8 @@ hash_query <- function(quer) {
 #' \dontrun{exists_in_cache("de245179163e5245a56484e7207bf3a3469c358b")}
 exists_in_cache <- function(key, max_lifetime = 30) {
   file_path <- file_path(get_cache_dir(), key)
-  if (file.exists(file_path) && !missing(max_lifetime)) {
+  stopifnot(is.numeric(max_lifetime))
+  if (file.exists(file_path)) {
     age <- difftime(Sys.time(), file.info(file_path)$mtime, units = "days")
     if (age >= max_lifetime) return(FALSE)
   }
@@ -88,7 +89,6 @@ file_path <- function(...) {
 
 #' Smart matching of functions
 #'
-#' @importFrom assertthat assert_that
 #' @param fun function name, as a string
 #' @return the desired function
 #'
@@ -98,7 +98,7 @@ file_path <- function(...) {
 match_fun <- function(fun) {
   fun2 <- NULL
   fun <- as.character(fun)
-  assertthat::assert_that(assertthat::is.string(fun))
+  stopifnot(is.string(fun))
   if (grepl(":::", fun)) {
     # if in form package:::function
     args <- unlist(strsplit(fun, ":::"))
@@ -115,4 +115,8 @@ match_fun <- function(fun) {
     })
   }
   fun2
+}
+
+is.string <- function(x) {
+    is.character(x) && length(x) == 1
 }

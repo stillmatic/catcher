@@ -20,28 +20,26 @@ cache_op <- function(fun, quer,
                      overwrite = FALSE,
                      max_lifetime = 30,
                      ...) {
+  # match string to actual function
   fun2 <- match_fun(fun)
-
   # run and immediately return the data
   if (!use_cache) {
     return(fun2(quer, ...))
   }
-
-  key <- hash_query(paste0(fun, quer, ..., collapse = ""))
   # load cached version
+  key <- hash_query(paste0(fun, quer, ..., collapse = ""))
   if (exists_in_cache(key, max_lifetime) && !overwrite) {
     dat <- read_from_cache(key)
-    return(dat)
   } else {
     dat <- fun2(quer, ...)
     save_to_cache(dat, key)
-    return(dat)
   }
+  return(dat)
 }
 
 #' Get info about the cache
 #'
-#' Returns table with hashes, size of files (in MB), when each file was last modified, and the age in days of each file.
+#' Returns table with hashes, size of files (in MB), when each file was last modified, and the age (in days) of each file.
 #' If the cache folder is empty, or doesn't exist (i.e. not created yet), this returns an empty dataframe.
 #'
 #' @param summary_only Should we only print summary info?
