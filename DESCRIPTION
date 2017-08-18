@@ -3,7 +3,7 @@ Type: Package
 Title: Drop in Caching for R Functions
 Version: 0.2.0
 Authors@R: c(
-    person("Chris", "Hua", email = "chua@wharton.upenn.edu", role = c("aut", "cre"))
+    person("Chris", "Hua", email = "hua.christopher@gmail.com", role = c("aut", "cre"))
   )
 Description: Caches results of functions on disk, and automagically
     accesses them from disk when the function is called again. Especially
