@@ -2,7 +2,7 @@ context("remote operations")
 
 test_that("load small csv", {
   # random csv file
-  csv_url <- "https://cdn.rawgit.com/aronlindberg/Social-Network-Analysis-in-R/master/r_keyactorcentrality.csv"
+  csv_url <- "https://cdn.jsdelivr.net/gh/aronlindberg/Social-Network-Analysis-in-R@master/r_keyactorcentrality.csv"
   read_c <- function(url, ...) {
     catcher::cache_op("read.csv", url, ...)
   }
